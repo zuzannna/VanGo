@@ -4,14 +4,18 @@ While completing PhD at NYU I often spent my weekends at numerous galleries and 
 
 __There should be a way to curate your trip depending on your personal preferences__
 
-That is how the idea of VanGo was born. During Insight, a program that helps PhDs transition from academia to careers as data scientists, I got to spend three weeks developing VanGo from scratch. I started with building the database, then I designed and implemented the algorithm in Python, and finally developed the front-end using Flask and AWS. Let me walk you through the steps.
+That is how the idea of VanGo was born. During [Insight Data Science Fellowship](http://insightdatascience.com), a program that helps PhDs transition from academia to careers as data scientists, I got to spend three weeks developing VanGo from scratch. I started with building the database, then I designed and implemented the algorithm in Python, and finally developed the front-end using Flask and AWS. Let me walk you through the steps.
 
-![VanGo_main](VanGo_main)
+![VanGo_main](VanGo_main.png)
 
 As a data source, I used curatorial descriptions of paintings and drawings which I queried in SPARQL (a language for semantic databases, used by cultural heritage institutions) from British Museum's collection. Their database is great and publicly available at http://collection.britishmuseum.org/sparql. After some web scraping, and text processing (such as tokenizing and lemmatizing), I ran principal component analysis (PCA) to reduce the dimensionality of my dataset and basically describe every drawing and painting as a vector of numbers corresponding to the components of the PCA. When user enters a word, it is projected onto the PCA components and the web interface brings up art pieces which have highest cosine similarity with the input word. So, the analysis funnel looks something like this:
 
-![VanGo_analysis_funnel](VanGo_analysis_funnel)
+![VanGo_analysis_funnel](VanGo_analysis.png)
 
-Importantly, it will only return matches for words initially used in curatorial descriptions, so if you try anything like "cool" or "stuff" it won't work (finding a way to bridge these words with expert descriptions would be another awesome project). In other words, the search results will reflect similarities between artworks which were discovered by PCA - which don't necessarily reflect "the grand truth". What's particularly cool about this collection is that the majority of works originates from Asia, so the themes discovered by my algorithm reflect those favored by artists. Happy exploring!
+Importantly, it will only return matches for words initially used in curatorial descriptions, so if you try anything like "cool" or "stuff" it won't work (finding a way to bridge these words with curatorial descriptions would be a whole another project:). In other words, the search results will reflect similarities between artworks which were discovered by PCA - which don't necessarily reflect "the grand truth" but reveal the structure of the data set. 
+
+For example, the majority of works in this data set originates from Asia, so the themes discovered by my algorithm reflect those favored by artists. How cool is that? Anyway, try it yourself and happy exploring!
+
+For a short presentation of the project, see my slides at http://www.slideshare.net/ZuzannaKyszejko/zuzannaklyszejkovango and if you want to try the app go to http://vango.hopto.org/input
 
 
